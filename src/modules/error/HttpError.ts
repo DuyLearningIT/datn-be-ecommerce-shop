@@ -7,9 +7,15 @@ export class HttpError extends Error {
   }
 }
 
-export class BadRequestEror extends HttpError {
+export class BadRequestError extends HttpError {
   constructor(message = "Bad Request") {
-    super(404, message);
+    super(400, message);
+  }
+}
+
+export class InvalidCredentials extends HttpError{
+  constructor(message = "Invalid Credentials"){
+    super(401, message);
   }
 }
 

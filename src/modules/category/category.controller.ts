@@ -1,5 +1,5 @@
 import { CategoryService } from "./category.service";
-import e, { NextFunction, type Request, type Response } from "express";
+import { NextFunction, type Request, type Response } from "express";
 
 const categoryService = new CategoryService();
 

@@ -1,4 +1,4 @@
-import { BadRequestEror, NotFoundError } from "../error/HttpError";
+import { BadRequestError, NotFoundError } from "../error/HttpError";
 import { prisma } from "../prisma/prisma.db";
 import { CreateCategoryDto, UpdateCategoryDto } from "./dto/category.dto";
 
@@ -15,11 +15,7 @@ export class CategoryService {
       },
     });
     if (!check) throw new NotFoundError("Category not found !");
-    return prisma.categories.findUnique({
-      where: {
-        id: id,
-      },
-    });
+    return check;
   }
   // Create new category
   async create(data: CreateCategoryDto) {
@@ -29,7 +25,7 @@ export class CategoryService {
         name: data.name,
       },
     });
-    if (check) throw new BadRequestEror("Category name already exists !");
+    if (check) throw new BadRequestError("Category name already exists !");
     return prisma.categories.create({
       data: {
         name: data.name,
