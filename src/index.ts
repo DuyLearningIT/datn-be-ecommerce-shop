@@ -2,6 +2,7 @@ import "dotenv/config";
 import express, { type Request, type Response } from "express";
 import categoryRouter from "./modules/category/category.router";
 import userRouter from "./modules/user/user.router";
+import productRouter from "./modules/product/product.router";
 import { errorHandler } from "./middleware/errorHandler";
 
 const app = express();
@@ -9,6 +10,7 @@ app.use(express.json());
 
 app.use("/api/categories", categoryRouter);
 app.use("/api/users", userRouter);
+app.use("/api/products", productRouter);
 
 app.get("/", (req: Request, res: Response) => {
   res.status(200).json({ message: "WELCOME TO NQD_SHOP !" });
