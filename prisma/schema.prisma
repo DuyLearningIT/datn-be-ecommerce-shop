@@ -54,7 +54,7 @@ model categories {
   updated_at         DateTime?    @db.DateTime(0)
   categories         categories?  @relation("categoriesTocategories", fields: [parent_category_id], references: [id], onUpdate: NoAction, map: "categories_ibfk_1")
   other_categories   categories[] @relation("categoriesTocategories")
-  products           products?
+  products           products[]
 
   @@index([parent_category_id], map: "parent_category_id")
 }
@@ -162,7 +162,7 @@ model products {
   created_at       DateTime?          @db.DateTime(0)
   updated_at       DateTime?          @db.DateTime(0)
   product_variants product_variants[]
-  categories       categories         @relation(fields: [id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "id")
+  categories       categories         @relation(fields: [category_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "category_id")
 
   @@index([category_id], map: "category_id")
   @@index([name], map: "idx_products_name")

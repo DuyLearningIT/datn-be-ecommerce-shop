@@ -35,20 +35,27 @@ export class ProductService {
     return newPro;
   }
 
-  async update(data:  ProductUpdateDto) {
+  async update(data: ProductUpdateDto) {
     const product = await prisma.products.findUnique({
       where: { id: data.id },
     });
     if (!product) throw new NotFoundError("Product not found !");
     const { id, ...updatedData } = data;
     const updatedPro = await prisma.products.update({
-      where: { id: data.id },
-      data: updatedData,
+      where: { id: id },
+      data: {
+        ...updatedData,
+        updated_at: new Date(),
+      },
     });
     return updatedPro;
   }
 
   async delete(id: number) {
+    const product = await prisma.products.findUnique({
+      where: { id: id },
+    });
+    if (!product) throw new NotFoundError("Product not found !");
     return prisma.products.delete({ where: { id: id } });
   }
 }
